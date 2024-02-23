@@ -113,7 +113,7 @@ const MakeCategory = () => {
                         onChange={handleInputChange}
                       >
                         <option value="" disabled selected>
-                          Category{" "}
+                          Category
                         </option>
                         <option value="saree"> saree</option>
                         <option value="lungi"> lungi</option>

@@ -9,7 +9,8 @@ const Navbar = () => {
     { id: 1, path: "/", name: "Home" },
     { id: 2, path: "/products", name: "Products" },
     { id: 2, path: "/aboutUs", name: "About-Us" },
-    { id: 3, path: "/contactus", name: "Contact-Us" },
+    { id: 2, path: "/aboutUs", name: "About-Us" },
+    { id: 3, path: "/login", name: "Login" },
   ];
   return (
     <div className="   sticky top-0 border-b shadow-lg shadow-blue-200 bg-blue-50 z-[9999]">
