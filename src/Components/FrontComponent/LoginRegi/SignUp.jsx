@@ -4,8 +4,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = ({ loginArea }) => {
-  //   const { setLoading } = AuthProvider;
-  const [loading, setLoading] = useState(true);
+  const { setLoading } = AuthProvider;
+  //   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: "",
@@ -42,9 +42,13 @@ const SignUp = ({ loginArea }) => {
           localStorage.setItem("accessToken", result.data.token);
           localStorage.setItem("data", JSON.stringify(result.data.other));
           setLoading(false);
-          toast.success("Registration successful");
+          //   toast.success("Registration successful");
+          //   navigate("/");
 
-          navigate("/");
+          toast.success("User Registration successfully ");
+          setTimeout(function () {
+            navigate(location?.state ? location.state : "/");
+          }, 500);
         }
         if (result.error) {
           toast.error("Registration failed");
