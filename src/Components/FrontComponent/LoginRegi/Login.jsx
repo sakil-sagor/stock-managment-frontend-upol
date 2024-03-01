@@ -1,52 +1,63 @@
+import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import blue from "../../../assets/blue.gif";
-import AuthProvider from "../../../contexts/AuthProvider";
+import useAxios from "../../../hooks/useAxios";
 
 const Login = () => {
+  const { axiosSecure } = useAxios();
   // const { , setDonor, setUserPhone } = useContext(AdminContext)
-  const { setLoading } = AuthProvider;
+  // const { setLoading } = AuthProvider;
   const [phone, setPhone] = useState("");
   const [loginflow, setLoginflow] = useState(false);
   const [password, setPassword] = useState("");
   // const location = useLocation();
   const navigate = useNavigate();
-  // const from = location.state?.from?.pathname || "/dashboard"
-  const from = "/dashboard";
+  const from = location.state?.from?.pathname || "/";
+  // const from = "/dashboard";
   const data = {
-    teacherPhone: phone,
+    phone: phone,
     password: password,
   };
-  const handleLogin = (event) => {
-    event.preventDefault();
-    setLoginflow(true);
-    fetch("http://localhost:5000/api/v1/teacher/login", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        if (result.status === "success") {
-          localStorage.setItem("accessToken", result.data.token);
-          localStorage.setItem("data", JSON.stringify(result.data.other));
-          // setLoading(true)
-          toast.success("Login successful");
-          setLoading(false);
-          setTimeout(() => {
-            navigate(from, { replace: true });
-            setLoginflow(false);
-          }, 700);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      console.log(data);
+
+      const response = await axios.post(
+        "http://localhost:5000/api/v1/user/login",
+        data,
+        {
+          withCredentials: true,
         }
-        if (result.error) {
-          toast.error("Login failed");
-        }
-      });
+      );
+      2;
+      // Assuming you want to log the response data
+      console.log(response.data);
+      console.log(response.data.success);
+
+      if (response.data.success) {
+        localStorage.setItem("data", JSON.stringify(response.data.userData));
+        // setLoading(true)
+        toast.success("Login successful");
+        // setLoading(false);
+        setTimeout(() => {
+          navigate(from, { replace: true });
+          setLoginflow(false);
+        }, 1000);
+      }
+
+      // toast.success("User login successfully");
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message);
+    }
   };
+
   return (
     <div className=" bg-blue-50">
       <div className="">

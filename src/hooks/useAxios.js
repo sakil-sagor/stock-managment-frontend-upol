@@ -1,7 +1,6 @@
 import axios from "axios";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../contexts/AuthProvider";
 
 // const instance = axios.create({
 //     baseURL: 'https://assignment11ser.iitpark.com/api/v1',
@@ -15,7 +14,7 @@ export const axiosSecure = axios.create({
 
 const useAxios = () => {
   // return instance;
-  const { logout } = useContext(AuthContext);
+  // const { logout } = AuthProvider();
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -28,7 +27,7 @@ const useAxios = () => {
         if (error.response.status === 401 || error.response.status === 403) {
           console
             .log("logout the user")
-            // logout()
+            // logOut()
             //     .then(() => {
             //         navigate('/registration')
             //     })
