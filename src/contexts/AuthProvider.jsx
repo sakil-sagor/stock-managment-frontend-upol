@@ -35,6 +35,12 @@ const AuthProvider = ({ children }) => {
   const logout = () => {
     setLoading(true);
     localStorage.removeItem("data");
+    // document.cookie.split(";").forEach((cookie) => {
+    //   document.cookie = cookie
+    //     .replace(/^ +/, "")
+    //     .replace(/=.*/, `=;expires=${new Date().toUTCString()};path=/`);
+    // });
+
     setUser(null);
   };
   const authInfo = {

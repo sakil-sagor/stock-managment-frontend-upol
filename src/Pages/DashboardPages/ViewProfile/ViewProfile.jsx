@@ -1,8 +1,8 @@
-import AdminArea from "../../../Components/DashboardComponents/AdminArea/AdminArea";
+import AdminArea from "../../../Components/DashboardComponent/AdminArea/AdminArea";
 import { AuthState } from "../../../contexts/AuthProvider";
 
 const ViewProfile = () => {
-  const { user } = AuthState();
+  const { teacher } = AuthState();
 
   return (
     <div className="pb-24 pt-4">
@@ -11,7 +11,7 @@ const ViewProfile = () => {
           <p className="font-bold ">
             Role:
             <button className="bg-green-600 px-3 py-1 capitalize rounded-2xl mt-4 text-white">
-              {user?.role}
+              {teacher?.role}
             </button>
           </p>
           {/* <h1 className="text-indigo-900 font-semibold text-2xl mb-6 ml-4">Admin Profile</h1> */}

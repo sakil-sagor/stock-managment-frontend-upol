@@ -1,9 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import profileImage from "../../../assets/pro1.png";
-import { TeacherState } from "../../../contexts/TeacherProvider";
+import { AuthState } from "../../../contexts/AuthProvider";
 
 const SideNavbar = () => {
-  const { teacher, logout } = TeacherState();
+  const { user, logout } = AuthState();
 
   const navigate = useNavigate();
   // log out button
@@ -23,7 +23,7 @@ const SideNavbar = () => {
               src={profileImage}
               alt=""
             />
-            <p className="text-2xl mt-4">{teacher?.teacherName}</p>
+            <p className="text-2xl mt-4">{user?.fullName}</p>
           </div>
           <hr className="mb-6" />
           <div>
@@ -37,47 +37,24 @@ const SideNavbar = () => {
           <div>
             <Link
               className=" block py-1 border mb-3 hover:bg-blue-900 hover:text-white rounded-lg"
-              to="/dashboard/staff"
+              to="/dashboard/products"
             >
-              Staff
+              products
             </Link>
           </div>
-          {teacher.teacherPhone && (
+          {user.phone && (
             <>
               <div>
                 <Link
                   className=" block py-1 border mb-3 hover:bg-blue-900 hover:text-white rounded-lg"
-                  to="/dashboard/students"
+                  to="/dashboard/stocks"
                 >
-                  All Students
+                  Stocks
                 </Link>
               </div>
             </>
           )}
-          {teacher.teacherPhone && (
-            <>
-              <div>
-                <Link
-                  className=" block py-1 border mb-3 hover:bg-blue-900 hover:text-white rounded-lg"
-                  to="/dashboard/payment"
-                >
-                  Payment
-                </Link>
-              </div>
-            </>
-          )}
-          {teacher.teacherPhone && (
-            <>
-              <div>
-                <Link
-                  className=" block py-1 border mb-3 hover:bg-blue-900 hover:text-white rounded-lg"
-                  to="/dashboard/notice"
-                >
-                  Notice
-                </Link>
-              </div>
-            </>
-          )}
+
           {
             <div className="mt-24">
               <button

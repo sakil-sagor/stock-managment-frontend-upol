@@ -1,14 +1,22 @@
-import MakeCategory from "../../../Components/DashboardComponent/MakeCategory/MakeCategory";
-import MakeProduct from "../../../Components/DashboardComponent/MakeProduct/MakeProduct";
+import { Outlet } from "react-router-dom";
+import TopNavbar from "../../../Components/Shared/SideNavbar/TopNavbar";
 import useProducts from "../../../hooks/useProducts";
 
 const Products = () => {
   const [products] = useProducts();
-  console.log(products);
+
+  const routes = [
+    { id: 1, path: "/dashboard/products/all", name: "All Products" },
+    { id: 2, path: "/dashboard/products/addproducts", name: "Add Products" },
+  ];
   return (
     <div>
-      <MakeProduct></MakeProduct>
-      <MakeCategory></MakeCategory>
+      <div>
+        <div>
+          <TopNavbar routes={routes}></TopNavbar>
+        </div>
+        <Outlet></Outlet>
+      </div>
     </div>
   );
 };
