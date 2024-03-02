@@ -1,9 +1,10 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthState } from "../contexts/AuthProvider";
 
 // const instance = axios.create({
-//     baseURL: 'https://assignment11ser.iitpark.com/api/v1',
+//     baseURL: 'https://ass8-b8.vercel.app/api/v1',
 //     withCredentials: true,
 // })
 
@@ -14,7 +15,7 @@ export const axiosSecure = axios.create({
 
 const useAxios = () => {
   // return instance;
-  // const { logout } = AuthProvider();
+  const { logOut } = useContext(AuthState);
 
   const navigate = useNavigate();
   useEffect(() => {

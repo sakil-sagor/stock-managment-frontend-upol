@@ -1,5 +1,5 @@
-import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
+import { axiosSecure } from "../hooks/useAxios";
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
@@ -13,13 +13,13 @@ const AuthProvider = ({ children }) => {
 
       if (userInfo?.phone) {
         try {
-          const response = await axios.get(
+          const response = await axiosSecure.get(
             `http://localhost:5000/api/v1/user/${userInfo?.phone}`,
             {
               withCredentials: true,
             }
           );
-          console.log(response.data.data);
+          console.log(response.data);
           setUser(response?.data?.data);
           setLoading(false);
         } catch (error) {

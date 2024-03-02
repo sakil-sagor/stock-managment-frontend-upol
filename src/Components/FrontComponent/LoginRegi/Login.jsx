@@ -4,12 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import blue from "../../../assets/blue.gif";
-import useAxios from "../../../hooks/useAxios";
+import { AuthState } from "../../../contexts/AuthProvider";
 
 const Login = () => {
-  const { axiosSecure } = useAxios();
-  // const { , setDonor, setUserPhone } = useContext(AdminContext)
-  // const { setLoading } = AuthProvider;
+  const { setLoading } = AuthState();
   const [phone, setPhone] = useState("");
   const [loginflow, setLoginflow] = useState(false);
   const [password, setPassword] = useState("");
@@ -26,8 +24,6 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      console.log(data);
-
       const response = await axios.post(
         "http://localhost:5000/api/v1/user/login",
         data,
@@ -42,16 +38,13 @@ const Login = () => {
 
       if (response.data.success) {
         localStorage.setItem("data", JSON.stringify(response.data.userData));
-        // setLoading(true)
         toast.success("Login successful");
-        // setLoading(false);
+        setLoading(false);
         setTimeout(() => {
           navigate(from, { replace: true });
           setLoginflow(false);
         }, 1000);
       }
-
-      // toast.success("User login successfully");
     } catch (error) {
       console.error(error);
       toast.error(error.message);

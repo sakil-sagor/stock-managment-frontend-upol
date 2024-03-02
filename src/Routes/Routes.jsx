@@ -8,6 +8,7 @@ import ContactUs from "../Pages/FrontEndPages/ContactUs/ContactUs";
 import ErroPage from "../Pages/FrontEndPages/ErrorPage/ErroPage";
 import Home from "../Pages/FrontEndPages/Home/Home";
 import Registration from "../Pages/FrontEndPages/Registration/Registration";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,11 @@ const router = createBrowserRouter([
 
       {
         path: "/products",
-        element: <Products></Products>,
+        element: (
+          <PrivateRoute>
+            <Products></Products>
+          </PrivateRoute>
+        ),
         children: [
           {
             path: "/products",
@@ -44,7 +49,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/aboutUs",
-        element: <AboutUs></AboutUs>,
+        element: (
+          <PrivateRoute>
+            {" "}
+            <AboutUs></AboutUs>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/contactus",
