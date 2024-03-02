@@ -15,7 +15,6 @@ const AdminArea = () => {
     date.getFullYear(),
   ];
 
-  console.log(user);
   return (
     <div>
       <h2 className="text-center text-4xl font-bold text-blue-950 mb-6">

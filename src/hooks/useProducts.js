@@ -15,7 +15,6 @@ const useProducts = () => {
             withCredentials: true,
           }
         );
-        console.log(response.data.data);
         setProducts(response.data.data);
         setLoading(false);
       } catch (error) {

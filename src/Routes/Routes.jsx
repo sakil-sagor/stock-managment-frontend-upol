@@ -1,8 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import MakeCategory from "../Components/DashboardComponent/MakeCategory/MakeCategory";
-import MakeProduct from "../Components/DashboardComponent/MakeProduct/MakeProduct";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Main from "../Layout/Main";
+import AllProductsPage from "../Pages/DashboardPages/Products/AllProductsPage/AllProductsPage";
 import Products from "../Pages/DashboardPages/Products/Products";
 import ViewProfile from "../Pages/DashboardPages/ViewProfile/ViewProfile";
 import AboutUs from "../Pages/FrontEndPages/AboutUs/AboutUs";
@@ -23,28 +22,28 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
 
-      {
-        path: "/products",
-        element: (
-          <PrivateRoute>
-            <Products></Products>
-          </PrivateRoute>
-        ),
-        children: [
-          {
-            path: "/products",
-            element: <Products></Products>,
-          },
-          {
-            path: "/products/makeCategory",
-            element: <MakeCategory></MakeCategory>,
-          },
-          {
-            path: "/products/makeProduct",
-            element: <MakeProduct></MakeProduct>,
-          },
-        ],
-      },
+      // {
+      //   path: "/products",
+      //   element: (
+      //     <PrivateRoute>
+      //       <Products></Products>
+      //     </PrivateRoute>
+      //   ),
+      //   children: [
+      //     {
+      //       path: "/products",
+      //       element: <Products></Products>,
+      //     },
+      //     {
+      //       path: "/products/makeCategory",
+      //       element: <MakeCategory></MakeCategory>,
+      //     },
+      //     {
+      //       path: "/products/makeProduct",
+      //       element: <MakeProduct></MakeProduct>,
+      //     },
+      //   ],
+      // },
       {
         path: "/login",
         element: <Registration></Registration>,
@@ -76,6 +75,16 @@ const router = createBrowserRouter([
           {
             path: "/dashboard/products",
             element: <Products></Products>,
+            children: [
+              // {
+              //   path: "/dashboard/products",
+              //   element: <ViewProfile></ViewProfile>,
+              // },
+              {
+                path: "/dashboard/products",
+                element: <AllProductsPage></AllProductsPage>,
+              },
+            ],
           },
         ],
       },
