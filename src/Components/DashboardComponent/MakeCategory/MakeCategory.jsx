@@ -1,18 +1,17 @@
-import { useEffect, useState } from "react";
-
+import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import blue from "../../../assets/blue.gif";
+import useCategory from "../../../hooks/useCategory";
 
 const MakeCategory = () => {
-  const [allCategory, setAllCategory] = useState([]);
-  const [loading, setLoading] = useState(false);
-
+  const [allCategory, setAllCategory, loading, setLoading] = useCategory();
+  // const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     category: "",
-    subCategory: "",
   });
 
+  // get category name
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
@@ -20,13 +19,11 @@ const MakeCategory = () => {
     });
   };
 
+  // submit form for make category
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
-    // Other registration form submission logic
-
-    fetch("https://newcollection-server.vercel.app/addbrands", {
+    fetch("http://localhost:5000/api/v1/product/category", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -35,11 +32,11 @@ const MakeCategory = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.insertedId) {
+        console.log(data);
+        if (data.status === "success") {
           toast.success("success");
           setFormData({
             category: "",
-            subCategory: "",
           });
         }
 
@@ -47,54 +44,48 @@ const MakeCategory = () => {
         if (data.error) {
           setFormData({
             category: "",
-            subCategory: "",
           });
 
           toast.error(" failed");
         }
       });
   };
-
-  // load all category
-  // load all orders
-  useEffect(() => {
-    fetch("https://newcollection-server.vercel.app/allBrands")
-      .then((res) => res.json())
-      .then((data) => setAllCategory(data));
-  }, [loading]);
-
+  // delete category from db
   const handleRemovecategory = async (id) => {
+    setLoading(true);
     if (id) {
-      const url = `https://newcollection-server.vercel.app/category/${id}`;
-
+      const url = `http://localhost:5000/api/v1/product/category/${id}`;
       fetch(url, {
         method: "DELETE",
       })
         .then((res) => res.json())
         .then((data) => {
-          if (data.deletedCount > 0) {
+          console.log(data);
+          if (data.data.deletedCount > 0) {
             toast.success("success");
             const remainingData = allCategory.filter((user) => user._id !== id);
             setAllCategory(remainingData);
           }
         });
+      setLoading(false);
     }
   };
+
   return (
     <div>
-      <div className=" min-h-screen">
-        <div className="full-width-all pt-4  pb-24 ">
-          <div className="w-full  m-auto pt-12 flex gap-8">
+      <div className=" p-2 text-sm">
+        <div className=" ">
+          <div className="w-full  m-auto pt-4 flex gap-8">
             <div className="w-1/2 ">
               <div className=" ">
-                <div className=" border shadow-md shadow-blue-300 px-2 py-6 md:p-8 text-center rounded-md">
-                  <h2 className="text-2xl font-bold text-blue-700">
+                <div className=" border shadow-md shadow-blue-300 px-2 py-2 md:p-2 text-center rounded-md">
+                  <h2 className="text-xl font-bold text-blue-700">
                     Add Category
                   </h2>
                 </div>
                 <div className=" mt-4 ">
                   <form
-                    className=" border shadow-xl shadow-blue-300 px-2 py-6 md:p-8 rounded-md"
+                    className=" border shadow-xl shadow-blue-300 px-2 py-4 md:p-2 rounded-md"
                     onSubmit={handleSubmit}
                   >
                     <div className="flex flex-col w-full">
@@ -104,36 +95,13 @@ const MakeCategory = () => {
                       >
                         Name
                       </label>
-
-                      <select
-                        required
-                        className="py-2 px-4 w-full text-lg  required rounded-md "
-                        name="category"
-                        value={formData.category}
-                        onChange={handleInputChange}
-                      >
-                        <option value="" disabled selected>
-                          Category
-                        </option>
-                        <option value="saree"> saree</option>
-                        <option value="lungi"> lungi</option>
-                        <option value="shawl">shawl</option>
-                      </select>
-                    </div>
-                    <div className="flex flex-col w-full">
-                      <label
-                        className=" text-gray-600 font-semibold block "
-                        htmlFor="subCategory"
-                      >
-                        Name
-                      </label>
                       <input
                         required
                         className="py-1 px-2 rounded-md border border-gray-300"
                         type="text"
-                        name="subCategory"
-                        placeholder="Sub-Category Name"
-                        value={formData.subCategory}
+                        name="category"
+                        placeholder="Category Name"
+                        value={formData.category}
                         onChange={handleInputChange}
                       />
                     </div>
@@ -149,6 +117,7 @@ const MakeCategory = () => {
                             alt=""
                           />
                         </button>
+
                         <button
                           className={`w-full h-full  text-white py-18 ${
                             loading && "hidden"
@@ -167,7 +136,7 @@ const MakeCategory = () => {
                 <thead className="">
                   <tr className="text-left border">
                     <th className="px-4 py-2">Category</th>
-                    <th className="px-4 py-2">Sub Category</th>
+
                     <th className="px-4 py-2">Action</th>
                   </tr>
                 </thead>
@@ -180,7 +149,7 @@ const MakeCategory = () => {
                     <td className="px-4 py-4  text-blue-500 ">
                       {cat.category}
                     </td>
-                    <td className="px-4 py-4">{cat?.subCategory}</td>
+
                     <td className="px-4 py-4">
                       <button
                         onClick={() => handleRemovecategory(cat?._id)}

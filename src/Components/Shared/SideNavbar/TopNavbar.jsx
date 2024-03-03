@@ -11,7 +11,7 @@ const TopNavbar = ({ routes }) => {
                 to={route?.path}
                 className="block py-2  px-12  hover:bg-sky-900 "
               >
-                <span className=" block text-white">{route?.name}</span>
+                <span className=" block text-white text-sm">{route?.name}</span>
               </NavLink>
             </li>
           ))}

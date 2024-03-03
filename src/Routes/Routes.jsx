@@ -1,7 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Main from "../Layout/Main";
+import AddProductsPage from "../Pages/DashboardPages/Products/AddProductsPage/AddProductsPage";
 import AllProductsPage from "../Pages/DashboardPages/Products/AllProductsPage/AllProductsPage";
+import CatogeryPage from "../Pages/DashboardPages/Products/CatogeryPage/CatogeryPage";
 import Products from "../Pages/DashboardPages/Products/Products";
 import ViewProfile from "../Pages/DashboardPages/ViewProfile/ViewProfile";
 import AboutUs from "../Pages/FrontEndPages/AboutUs/AboutUs";
@@ -76,13 +78,21 @@ const router = createBrowserRouter([
             path: "/dashboard/products",
             element: <Products></Products>,
             children: [
-              // {
-              //   path: "/dashboard/products",
-              //   element: <ViewProfile></ViewProfile>,
-              // },
               {
                 path: "/dashboard/products",
                 element: <AllProductsPage></AllProductsPage>,
+              },
+              {
+                path: "/dashboard/products/all",
+                element: <AllProductsPage></AllProductsPage>,
+              },
+              {
+                path: "/dashboard/products/addproducts",
+                element: <AddProductsPage></AddProductsPage>,
+              },
+              {
+                path: "/dashboard/products/category",
+                element: <CatogeryPage></CatogeryPage>,
               },
             ],
           },

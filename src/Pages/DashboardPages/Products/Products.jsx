@@ -8,6 +8,7 @@ const Products = () => {
   const routes = [
     { id: 1, path: "/dashboard/products/all", name: "All Products" },
     { id: 2, path: "/dashboard/products/addproducts", name: "Add Products" },
+    { id: 3, path: "/dashboard/products/category", name: "Category" },
   ];
   return (
     <div>
