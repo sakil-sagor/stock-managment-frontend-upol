@@ -24,28 +24,14 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
 
-      // {
-      //   path: "/products",
-      //   element: (
-      //     <PrivateRoute>
-      //       <Products></Products>
-      //     </PrivateRoute>
-      //   ),
-      //   children: [
-      //     {
-      //       path: "/products",
-      //       element: <Products></Products>,
-      //     },
-      //     {
-      //       path: "/products/makeCategory",
-      //       element: <MakeCategory></MakeCategory>,
-      //     },
-      //     {
-      //       path: "/products/makeProduct",
-      //       element: <MakeProduct></MakeProduct>,
-      //     },
-      //   ],
-      // },
+      {
+        path: "/products",
+        element: (
+          <PrivateRoute>
+            <Products></Products>
+          </PrivateRoute>
+        ),
+      },
       {
         path: "/login",
         element: <Registration></Registration>,
