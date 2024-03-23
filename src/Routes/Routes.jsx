@@ -10,6 +10,7 @@ import AboutUs from "../Pages/FrontEndPages/AboutUs/AboutUs";
 import ContactUs from "../Pages/FrontEndPages/ContactUs/ContactUs";
 import ErroPage from "../Pages/FrontEndPages/ErrorPage/ErroPage";
 import Home from "../Pages/FrontEndPages/Home/Home";
+import ProductsFront from "../Pages/FrontEndPages/ProductsFront/ProductsFront";
 import Registration from "../Pages/FrontEndPages/Registration/Registration";
 import PrivateRoute from "./PrivateRoute";
 
@@ -26,11 +27,7 @@ const router = createBrowserRouter([
 
       {
         path: "/products",
-        element: (
-          <PrivateRoute>
-            <Products></Products>
-          </PrivateRoute>
-        ),
+        element: <ProductsFront></ProductsFront>,
       },
       {
         path: "/login",
