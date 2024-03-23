@@ -21,7 +21,8 @@ const ProductsFront = () => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get(url);
-        setAllRooms(response?.data?.data?.result);
+        // setAllRooms(response?.data?.data?.result);
+        console.log(response.data);
         setCount(response?.data?.data?.pageCount);
         setTotal(response?.data?.data?.totalRoom);
 

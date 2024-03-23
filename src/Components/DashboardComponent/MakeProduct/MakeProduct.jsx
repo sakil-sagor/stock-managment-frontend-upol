@@ -28,17 +28,19 @@ const MakeProduct = () => {
     console.log(product);
   };
   return (
-    <div>
-      <div>
+    <div className="px-2">
+      <div className="grid grid-cols-2">
         <div className="text-sm">
           <form onSubmit={handleDetailsSubmit}>
-            <div>
-              <label htmlFor=""> Product Name</label>
+            <div className="flex my-2 ">
+              <label htmlFor="" className=" w-3/12">
+                Product Name :
+              </label>
               <input
                 onChange={handleChange}
                 type="text"
                 name="productName"
-                className="border "
+                className=" border-2  w-6/12"
               />
             </div>
             <div className="my-4">
@@ -127,6 +129,9 @@ const MakeProduct = () => {
               <button type="submit">Submit</button>
             </div>
           </form>
+        </div>
+        <div>
+          <h2>this is all products area</h2>
         </div>
       </div>
     </div>
